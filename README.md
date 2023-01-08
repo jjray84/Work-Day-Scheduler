@@ -12,3 +12,5 @@ As the day continues, the color within each time block will change depending on 
 
 ![Screenshot of the Schedular](images/127.0.0.1_5500_Work-Day-Scheduler_index.html.png)
 ## Live Link
+
+https://jjray84.github.io/Work-Day-Scheduler/
