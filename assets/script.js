@@ -1,38 +1,33 @@
-$(document).ready(function () {
+$(document).ready(function () { 
+  //This prevents anything from being executed prior to the page loading.
 
-   // TODO: Add code to display the current date in the header of the page.
 
-  $('#currentDay').text(dayjs(Date.now()).format('dddd, MMMM Do'));
+  $('#currentDay').text(dayjs(Date.now()).format('dddd, MMMM Do, YYYY'));
   console.log(currentDay);
-  
-    // TODO: Add a listener for click events on the save button. This code should
-    // use the id in the containing time-block as a key to save the user input in
-    // local storage. HINT: What does `this` reference in the click listener
-    // function? How can DOM traversal be used to get the "hour-x" id of the
-    // time-block containing the button that was clicked? How might the id be
-    // useful when saving the description in local storage?
+   // This formats the Date and displays it to the page.
 
   $('.saveBtn').click(function() {
     var time = $(this).parent().attr("id");
     var text = $(this).siblings(".description").val();
-
+    //This click function parses through the DOM to check for any text values entered.
     localStorage.setItem(time, text);
+    // This takes the value of text and saves it to local storage.
   })
 
-    // TODO: Add code to apply the past, present, or future class to each time
-    // block by comparing the id to the current hour. HINTS: How can the id
-    // attribute of each time-block be used to conditionally add or remove the
-    // past, present, and future classes? How can Day.js be used to get the
-    // current hour in 24-hour time?
 
 
 
-  $(".main-div").children("div").each(function() {
-    console.log($(this).attr("id"));
-  });
 
-  for (let i = 0; i < 18; i++) {
-    console.log($(this).attr("id"));
+
+
+
+  var mainDiv = $('#main').children('.row'); //Targets the main <div> and all associated children with the class of row
+  for (let i = 0; i < mainDiv.length; i++) { // Loops through the total length of the main Div's Children with class of row
+    var mainDivPosition = mainDiv.eq(i).attr('id'); //the .eq() selects an element with a specific index number starting from zero
+    var values = localStorage.getItem(mainDivPosition);
+    console.log(mainDivPosition); // Check the console to make sure that all the main Div's are picked up
+    console.log(values); // Shows in the console what the values are inside the local storage
+    mainDiv.eq(i).children(".description").val(values); // Uses the .eq to ensure that whatever is in the value are in local storage is repopulated on the page. 
   }
 
 
@@ -40,26 +35,5 @@ $(document).ready(function () {
 
 
 
-
-
-
-
-
-
-
-
-    // TODO: Add code to get any user input that was saved in localStorage and set
-    // the values of the corresponding textarea elements. HINT: How can the id
-    // attribute of each time-block be used to do this?
-
-  $("#hour-09 .description").val(localStorage.getItem("hour-09"));
-  $("#hour-10 .description").val(localStorage.getItem("hour-10"));
-  $("#hour-11 .description").val(localStorage.getItem("hour-11"));
-  $("#hour-12 .description").val(localStorage.getItem("hour-12"));
-  $("#hour-13 .description").val(localStorage.getItem("hour-13"));
-  $("#hour-14 .description").val(localStorage.getItem("hour-14"));
-  $("#hour-15 .description").val(localStorage.getItem("hour-15"));
-  $("#hour-16 .description").val(localStorage.getItem("hour-16"));
-  $("#hour-17 .description").val(localStorage.getItem("hour-17"));
-      
+   // This checks the local storage and checks for the key value pair for the text to repopulate on the page when refreshed.   
 });
